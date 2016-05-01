@@ -20,17 +20,17 @@ import javax.json.JsonObject;
  */
 public class SMServer {
 
-    private static JsonObject buildResponse() {
-        JsonObject model = Json.createObjectBuilder()
-                .add("type", "message")
-                .add("message", (Json.createObjectBuilder()
-                        .add("destId", "555")
-                        .add("srcId", "444")
-                        .add("messageString", "Hey!")
-                        .add("serverTime", "12345")))
-                .build();
-        return model;
-    }
+//    private static JsonObject buildResponse() {
+//        JsonObject model = Json.createObjectBuilder()
+//                .add("type", "message")
+//                .add("message", (Json.createObjectBuilder()
+//                        .add("destId", "555")
+//                        .add("srcId", "444")
+//                        .add("messageString", "Hey!")
+//                        .add("serverTime", "12345")))
+//                .build();
+//        return model;
+//    }
 
     public static void main(String[] args) throws IOException {
 
@@ -67,21 +67,6 @@ public class SMServer {
                     messageQueue.forEach((SMessage sm) -> 
                             System.out.println("message in queue: " + sm.toString()));
                 }
-                //JsonObject jo = buildResponse();
-//                try (
-//                        PrintWriter out = new PrintWriter(cs.getOutputStream(), true);
-//                        BufferedReader in = new BufferedReader(
-//                                new InputStreamReader(
-//                                        cs.getInputStream()));) {
-//                    out.println(jo.toString());
-//                    System.out.println(jo.toString());
-//                    while (in.readLine() != null);
-//                    break;
-//                } catch (IOException e) {
-//                    System.err.println("Could not send json");
-//                    System.exit(-1);
-//                }
-
             }
         } catch (IOException e) {
             System.err.println("Could not listen on port " + portNumber);

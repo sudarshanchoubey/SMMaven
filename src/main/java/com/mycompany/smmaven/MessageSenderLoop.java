@@ -68,7 +68,7 @@ public class MessageSenderLoop implements Runnable {
                             = new PrintWriter(sc.getOutputStream(), true);
                     ConcurrentLinkedQueue<SMessage> sentMessages = destCas.getSentMessageList();
                     for (SMessage im : sentMessages) {
-                        if ((sm.getArrivalTime() - im.getArrivalTime() <= 10000)
+                        if ((sm.getArrivalTime() - im.getArrivalTime() <= 5000)
                                 && sm.getMessageString().contentEquals(im.getMessageString())) {
 
                             JsonObject jo = Json.createObjectBuilder().
