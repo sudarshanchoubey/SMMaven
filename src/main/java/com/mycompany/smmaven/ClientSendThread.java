@@ -48,15 +48,15 @@ public class ClientSendThread implements Runnable {
                         new InputStreamReader(System.in));
                 String inputFromUser;
                 while((inputFromUser = stdIn.readLine()) != null) {
-                  //  if(inputFromUser.matches("^\\d{10}:.*")) {
+                    if(inputFromUser.matches("^\\d{10}:.*$")) {
                         String output = createMessageString(inputFromUser);
                         System.out.println("sending " + output);
                         send.println(output);
-//                    } else {
-//                        System.out.println("Please enter message in " +
-//                                "the following format:\n" +
-//                                "99xxxxxxxx:message text\n");
-//                    }
+                    } else {
+                        System.out.println("Please enter message in " +
+                                "the following format:\n" +
+                                "99xxxxxxxx:message text\n");
+                    }
                 }
             } catch(IOException e) {
                 e.printStackTrace();

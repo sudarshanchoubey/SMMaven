@@ -65,15 +65,20 @@ public class ConnectionResponseThread implements Runnable {
                 return;
             } else {
                 if(clientMap.containsKey(cn.Id)) {
-                    Socket delSocket = clientMap.get(cn.Id).getSocket();
+                    ClientAtServer cas = clientMap.get(cn.Id);
+                    Socket delSocket = cas.getSocket();
                     delSocket.close();
-                    clientMap.remove(cn.Id);
+                    cas.setSocket(socket);
                     System.out.println("1014:closing socket " + delSocket.toString() + "for" + cn.Id);
+                    res = Response.createConnectionPassResponse();
+                    out.println(res.convertToJson());
+                    System.out.println("Reestablished connection");
+                } else {
+                    ClientAtServer cas = new ClientAtServer(cn.Id, socket);
+                    clientMap.put(cn.Id, cas);
+                    res = Response.createConnectionPassResponse();
+                    out.println(res.convertToJson());
                 }
-                ClientAtServer cas = new ClientAtServer(cn.Id,socket);
-                clientMap.put(cn.Id, cas);
-                res = Response.createConnectionPassResponse();
-                out.println(res.convertToJson());
                 
             }
         } catch (IOException e) {

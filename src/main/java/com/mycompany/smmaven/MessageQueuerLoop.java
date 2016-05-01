@@ -13,8 +13,6 @@ import java.net.Socket;
 import java.util.Date;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
@@ -66,6 +64,8 @@ class MessageQueuerLoop implements Runnable {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                } if(so.isClosed()) {
+                    clientSocketMap.remove(so);
                 }
             }
         }

@@ -26,12 +26,14 @@ public class ClientRecieveThread implements Runnable {
             this.socket = sock;
         }
         private void processAsMessageResponse(JsonObject jo) {
-            JsonValue jState = jo.get("state");
+/*            JsonValue jState = jo.get("state");
             if(jState.toString().contains("pass")) {
-                JsonObject jMessage = jo.getJsonObject("message");
+                JsonValue jMessage = jo.get("message");
+                JsonObject jMObject = 
+                        Json.createReader(new StringReader(jMessage.toString())).readObject();
                 System.out.println("Message " + 
-                        jMessage.get("message").toString() +
-                        "\nto " + jMessage.get("destId").toString() +
+                        jMObject.get("message").toString() +
+                        "\nto " + jMObject.get("destId").toString() +
                         " delivered");
             } else {
                 JsonObject jMessage = jo.getJsonObject("message");
@@ -41,13 +43,17 @@ public class ClientRecieveThread implements Runnable {
                         " failed to deliver. Error message:" +
                         jo.get("errormessage"));
             }
+*/
         }
         private void processAsRecievedMessage(JsonObject jo) {
             JsonValue jfrom = jo.get("srcId");
             String from = jfrom.toString();
+            from = from.replace("\"", "");
+            from = from.replace("\\", "");
             JsonValue messageString = jo.get("messageString");
             String message = messageString.toString();
             message = message.replace("\"", "");
+            message = message.replace("\\", "");
             System.out.println(from + ": " + message);
         }
         private void processRecievedString(String recieved) {
@@ -61,7 +67,7 @@ public class ClientRecieveThread implements Runnable {
                 jReader = Json.createReader(new StringReader(jMessage.toString()));
                 jo = jReader.readObject();
                 processAsRecievedMessage(jo);
-            } else if((jType != null) && (jType.toString().contains("messageResponse"))) {
+            } else if((jType != null) && (jType.toString().contains("response"))) {
                 processAsMessageResponse(jo);
             }
         }

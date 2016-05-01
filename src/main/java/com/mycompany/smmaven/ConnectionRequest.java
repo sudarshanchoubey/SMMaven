@@ -40,14 +40,15 @@ public class ConnectionRequest {
                 
         }
         rId = jId.toString();
+        String crId = rId.replace("\"", "");
         rType = jType.toString();
         
 //        if((Pattern.matches("\\d{10}", rId) == false) || (rType.contains("connection") == false)) {
 //                System.out.println("3:pattern error " + rId + " " + rType);
 //                return null;
 //        }
-        if(Pattern.matches("\\d{10}", rId) == false) {
-            System.out.println("pattern failed");
+        if(Pattern.matches("\\d{10}", crId) == false) {
+            System.out.println("pattern failed " + rId);
         }
         if(rType.contains(new String("connection")) == false) {
             System.out.println("string contains was false"
@@ -55,6 +56,7 @@ public class ConnectionRequest {
         }
            
         ConnectionRequest cn = new ConnectionRequest();
+        System.out.println(rId);
         cn.Id =rId;
         cn.type = rType;
         return cn;

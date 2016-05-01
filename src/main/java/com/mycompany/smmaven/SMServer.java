@@ -35,7 +35,7 @@ public class SMServer {
     public static void main(String[] args) throws IOException {
 
         if (args.length != 1) {
-            System.err.println("Usage: java KKMultiServer <port number>");
+            System.err.println("Usage: java SMServer <port number>");
             System.exit(1);
         }
         ConcurrentHashMap<String, ClientAtServer> socketMap = new ConcurrentHashMap<>();
