@@ -62,15 +62,15 @@ public class Response {
         }
         if(stateFromJson.contains("pass")){
             Response res = new Response();
-            res.type = new String(typeFromJson);
-            res.state = new String(stateFromJson);
-            res.responseType = new String(resType);
+            res.type = typeFromJson;
+            res.state = stateFromJson;
+            res.responseType = resType;
             return res;
         } else {
             Response res = new Response();
-            res.type = new String(typeFromJson);
-            res.state = new String(stateFromJson);
-            res.responseType = new String(resType);
+            res.type = typeFromJson;
+            res.state = stateFromJson;
+            res.responseType = resType;
             res.errorMessage = jErrorMessage.toString();
             return res;
         }

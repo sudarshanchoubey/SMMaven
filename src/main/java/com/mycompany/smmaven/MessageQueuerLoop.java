@@ -21,6 +21,7 @@ import javax.json.JsonValue;
 /**
  *
  * @author schoubey
+ * Puts newly received messages in the messageQ
  */
 class MessageQueuerLoop implements Runnable {
     private ConcurrentHashMap<String, ClientAtServer> clientSocketMap;

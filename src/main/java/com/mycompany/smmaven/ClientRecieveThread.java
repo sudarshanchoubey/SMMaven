@@ -26,25 +26,22 @@ public class ClientRecieveThread implements Runnable {
             this.socket = sock;
         }
         private void processAsMessageResponse(JsonObject jo) {
-/*            JsonValue jState = jo.get("state");
-            if(jState.toString().contains("pass")) {
-                JsonValue jMessage = jo.get("message");
-                JsonObject jMObject = 
-                        Json.createReader(new StringReader(jMessage.toString())).readObject();
-                System.out.println("Message " + 
-                        jMObject.get("message").toString() +
-                        "\nto " + jMObject.get("destId").toString() +
-                        " delivered");
-            } else {
-                JsonObject jMessage = jo.getJsonObject("message");
-                System.out.println("Message " + 
-                        jMessage.get("message").toString() +
-                        "\nto " + jMessage.get("destId").toString() +
-                        " failed to deliver. Error message:" +
-                        jo.get("errormessage"));
-            }
+/*            
+            TODO: this can be used to implement a double tick like watsapp to
+            show that the message has been sent currently we ignore the response
 */
         }
+        /*
+        Interpret a message recieved from the server and display it.
+        JSON for a new message
+        {
+        	“type”:”message”,
+                "message":{
+                    "srcId":"2222222222",
+                    "destId":"3333333333",
+                    "messageString":"Actual message sent to user.",
+	}
+        */
         private void processAsRecievedMessage(JsonObject jo) {
             JsonValue jfrom = jo.get("srcId");
             String from = jfrom.toString();
@@ -56,6 +53,27 @@ public class ClientRecieveThread implements Runnable {
             message = message.replace("\\", "");
             System.out.println(from + ": " + message);
         }
+        /*
+        This method processed the JSON recieved from the server and displays
+        the message recieved or the status of message which was sent earlier.
+        JSON Response to a message request
+        {
+            "type": "response",
+            "responseType":"messageResponse",
+            "state", "pass/fail",
+            "message",”original message JSON”,
+            "errorMessage":”reason for failure in case of failure example duplicate messages”
+        }
+        JSON for a new message
+        {
+        	“type”:”message”,
+                "message":{
+                    "srcId":"2222222222",
+                    "destId":"3333333333",
+                    "messageString":"Actual message sent to user.",
+	}
+}
+        */
         private void processRecievedString(String recieved) {
             System.out.println("recieved in client is " + recieved);
             JsonReader jReader = Json.createReader(new StringReader(recieved));

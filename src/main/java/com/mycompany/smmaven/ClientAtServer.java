@@ -14,12 +14,14 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  */
 public class ClientAtServer {
     private Socket socket;
-    private String ClientId;
-    private ConcurrentLinkedQueue<SMessage> sentMessageList;
+    private String ClientId;    //ten digit phone number
+    private ConcurrentLinkedQueue<SMessage> sentMessageList;    //messages already sent
+    // to client for tracking repeated messages
 
     /**
      * @return the socket
      */
+    @Override
     public String toString() {
         return("socket:" + socket.toString() + " cliId " + ClientId);
     }
@@ -40,6 +42,7 @@ public class ClientAtServer {
     }
 
     /**
+     * @param sm
      * @return the sentMessageList
      */
     public synchronized void addToSentMessageList(SMessage sm) {

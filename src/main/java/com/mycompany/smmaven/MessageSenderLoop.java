@@ -18,6 +18,7 @@ import javax.json.JsonObject;
 /**
  *
  * @author schoubey
+ * Picks up messages from the queue and sends them to destination clients.
  */
 public class MessageSenderLoop implements Runnable {
 
@@ -68,7 +69,7 @@ public class MessageSenderLoop implements Runnable {
                             = new PrintWriter(sc.getOutputStream(), true);
                     ConcurrentLinkedQueue<SMessage> sentMessages = destCas.getSentMessageList();
                     for (SMessage im : sentMessages) {
-                        if ((sm.getArrivalTime() - im.getArrivalTime() <= 5000)
+                        if ((sm.getArrivalTime() - im.getArrivalTime() <= 5000) //The 5 second contraint
                                 && sm.getMessageString().contentEquals(im.getMessageString())) {
 
                             JsonObject jo = Json.createObjectBuilder().

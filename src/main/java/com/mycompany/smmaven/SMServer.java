@@ -11,8 +11,6 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import javax.json.Json;
-import javax.json.JsonObject;
 
 /**
  *
@@ -62,7 +60,6 @@ public class SMServer {
                 if(i++ >= 1) {
                     for(String key:socketMap.keySet()) {
                         System.out.println("for "+ key + "socket is " + socketMap.get(key).toString());
-                        //socketMap.get(key).getSocket().close();
                     }
                     messageQueue.forEach((SMessage sm) -> 
                             System.out.println("message in queue: " + sm.toString()));

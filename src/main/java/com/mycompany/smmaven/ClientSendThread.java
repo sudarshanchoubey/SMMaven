@@ -12,11 +12,11 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import javax.json.Json;
 import javax.json.JsonObject;
-import javax.json.JsonValue;
 
 /**
  *
  * @author schoubey
+ * Reads the standard input of client and sends messages to server
  */
 public class ClientSendThread implements Runnable {
     Socket socket;

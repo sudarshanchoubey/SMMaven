@@ -16,6 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  *
  * @author schoubey
+ * Responds to a client when it creates a new connection
  */
 public class ConnectionResponseThread implements Runnable {
     /*
@@ -52,7 +53,6 @@ public class ConnectionResponseThread implements Runnable {
                                 socket.getInputStream()));
             String request;
             Response res;
-            Date arrivalTime = new Date();
             request = in.readLine();
             System.out.println(request);
             ConnectionRequest cn = ConnectionRequest.createConnectionRequest(request);
